@@ -1,9 +1,16 @@
 // ------------------------
 //  Model
 // ------------------------
-var data = {
-	results: {
+var model = {
+	//list of all channel objects
+	channels: [],
 
+	// Channel object constructor, used by controller.addChannel;
+	Channel: function(displayName, logo, url, status){
+		this.displayName = displayName;
+		this.logo = logo;
+		this.url = url;
+		this.status = status;	
 	}
 
 }; // end of data
@@ -15,33 +22,60 @@ var data = {
 // ------------------------
 var controller= {
 
+	//some users for testing purposes
+	//--------------------------------
+	//thomasballinger
+	//starladder_cs_en
+	//freecodecamp
+	//--------------------------------
+
 	init: function(){
-		this.makeCall();
+		this.makeStreamCall("freecodecamp");
 	},
 
-	makeCall: function(){
+	makeStreamCall: function(name){
 		$.ajax({
 			dataType: "jsonp",
-			url: 
-			//	 "https://api.twitch.tv/kraken/streams/freecodecamp",
-				 "https://api.twitch.tv/kraken/channels/freecodecamp",
+			url: "https://api.twitch.tv/kraken/streams/" + name,
 			success: function(results) {
-				controller.setResults(results);
-				// console.log(data.results);
-				view.render();
-
+				// if the stream is offline
+				if (results.stream === null){
+					// call controller.makeChannelCall instead
+					controller.makeChannelCall(name);
+				} else {
+					var channel = results.stream.channel;
+					var displayName = channel.display_name;
+					var logo = channel.logo;
+					var url = channel.url;
+					var status = channel.status;
+					controller.addChannel(displayName, logo, url, status);
+				}
 			}
 		});
 	},
 
-	setResults: function(results){
-		data.results = results;
+	makeChannelCall: function(name){
+		$.ajax({
+			dataType: "jsonp",
+			url: "https://api.twitch.tv/kraken/channels/" + name,
+			success: function(results) {
+				var displayName = results.display_name;
+				var logo = results.logo;
+				var url = results.url;
+				var status = "Offline";
+				controller.addChannel(displayName, logo, url, status);
+			}
+		});
+	},
+	
+	addChannel: function(displayName, logo, url, status){
+		var channel = new model.Channel(displayName, logo, url, status);
+		model.channels.push(channel);
 	},
 
-	getResults: function(){
-		return data.results;
+	getChannels: function(){
+		return model.channels;
 	}
-
 }; // end of controller
 
 
@@ -51,15 +85,15 @@ var controller= {
 // ------------------------
 var view = {
 
-	render: function(){
-		var info = controller.getResults();
-		this.displayData(info);
-	},
+	// render: function(){
+	// 	var info = controller.getChannels();
+	// 	this.displayChannels(channels);
+	// },
 
-	displayData: function(info){
-		console.log(info);
-		$("#temp").append("<div>" + info.display_name + "</div>");
-	}	
+	// displayChannels: function(channels){
+	// 	// console.log(info);
+	// 	$("#temp").append("<div>" +  + "</div>");
+	// }	
 
 }; // end of view
 
