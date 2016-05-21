@@ -3,6 +3,8 @@
 // ------------------------
 var model = {
 	//list of all channel objects
+	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb"],
+
 	channels: [],
 
 	// Channel object constructor, used by controller.addChannel;
@@ -30,7 +32,13 @@ var controller= {
 	//--------------------------------
 
 	init: function(){
-		this.makeStreamCall("freecodecamp");
+		this.getAndSetInfo();
+	},
+
+	getAndSetInfo: function(){
+		for(var i = 0; i < model.channelNames.length; i++){
+			controller.makeStreamCall(model.channelNames[i]);
+		}
 	},
 
 	makeStreamCall: function(name){
