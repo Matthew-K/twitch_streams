@@ -2,6 +2,7 @@
 	text-align: center;
 	height: 50px;
 	padding: 0;
+	cursor: pointer;
 }
 
 #allChannels{
@@ -16,10 +17,26 @@
 	background: #ddd;
 }
 
+#allChannels:hover{
+	background: #888;
+}
+
+#onlineChannels:hover{
+	background: #aaa;
+}
+
+#offlineChannels:hover{
+	background: #ccc;
+}
+
 .offline{
 	background: #FFABAB;
 }
 
 .online{
 	background: #B9B9FF;
+}
+
+.hide{
+	display: none;
 }

@@ -25,9 +25,10 @@ var model = {
 // ------------------------
 var controller= {
 
+	// runs at start of app
 	init: function(){
 		this.getAndSetInfo();
-		view.render();
+		view.init();
 	},
 
 	// use each channel name in model.channelNames to make an API call
@@ -80,6 +81,7 @@ var controller= {
 	getChannels: function(){
 		return model.channels;
 	}
+
 }; // end of controller
 
 
@@ -89,10 +91,16 @@ var controller= {
 // ------------------------
 var view = {
 
-	// render information about all channels
+	init: function(){
+		this.render();
+		this.createClickHandlers();
+	},
+
+	// render information about all channels 
 	render: function(){
 		$(document).ajaxStop(function() {
 			var channelsInfo = controller.getChannels();
+		
 			for (var i = 0; i < channelsInfo.length; i++){
 				var channel = channelsInfo[i];
 				var name = channel.displayName;
@@ -113,6 +121,36 @@ var view = {
 					$("#channels").append("<div class='online channel'>" + restOfDiv);
 				}
 			}
+		});
+	},
+
+	// create click handlers
+	createClickHandlers: function(){
+		this.allClick();
+		this.onlineClick();
+		this.offlineClick();
+	},
+
+	// display all channels when #allChannels div is clicked
+	allClick: function(){
+		$("#allChannels").on("click", function(){
+			$(".hide").removeClass("hide");
+		});
+	},
+
+	// display online channels when #onlineChannels div is clicked
+	onlineClick: function(){
+		$("#onlineChannels").on("click", function(){
+			$(".offline").addClass("hide");
+			$(".online").removeClass("hide");
+		});
+	},
+
+	// display offline channels when #offlineChannels div is clicked
+	offlineClick: function(){
+		$("#offlineChannels").on("click", function(){
+			$(".online").addClass("hide");
+			$(".offline").removeClass("hide");
 		});
 	}
 
