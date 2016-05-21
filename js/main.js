@@ -2,8 +2,9 @@
 //  Model
 // ------------------------
 var model = {
+
 	// array of channel names that will be used during API calls
-	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb"],
+	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb", "comster404"],
 
 	// array of all channel objects
 	channels: [],
@@ -44,7 +45,11 @@ var controller= {
 			url: "https://api.twitch.tv/kraken/streams/" + name,
 			success: function(results) {
 				// if the stream is offline
-				if (results.stream === null){
+				if(results.error){
+					var error = "error";
+					controller.addChannel(name, error, error, "This channel was not found.");
+				}
+				else if (results.stream === null){
 					// call controller.makeChannelCall instead
 					controller.makeChannelCall(name);
 				} else {
@@ -114,8 +119,10 @@ var view = {
 								"<p>" + status + "</p>" +
 								"<br>" +
 								"</div>";
-
-				if(status === "Offline"){
+				if(status === "This channel was not found."){
+					$("#channels").append("<div class='notFound channel'>" + restOfDiv);
+				}
+				else if(status === "Offline"){
 					$("#channels").append("<div class='offline channel'>" + restOfDiv);
 				} else {
 					$("#channels").append("<div class='online channel'>" + restOfDiv);
@@ -141,6 +148,7 @@ var view = {
 	// display online channels when #onlineChannels div is clicked
 	onlineClick: function(){
 		$("#onlineChannels").on("click", function(){
+			$(".notFound").addClass("hide");
 			$(".offline").addClass("hide");
 			$(".online").removeClass("hide");
 		});
@@ -149,6 +157,7 @@ var view = {
 	// display offline channels when #offlineChannels div is clicked
 	offlineClick: function(){
 		$("#offlineChannels").on("click", function(){
+			$(".notFound").addClass("hide");
 			$(".online").addClass("hide");
 			$(".offline").removeClass("hide");
 		});
