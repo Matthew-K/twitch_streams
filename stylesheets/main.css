@@ -1,0 +1,25 @@
+.option{
+	text-align: center;
+	height: 50px;
+	padding: 0;
+}
+
+#allChannels{
+	background: #999;
+}
+
+#onlineChannels{
+	background: #bbb;
+}
+
+#offlineChannels{
+	background: #ddd;
+}
+
+.offline{
+	background: #FFABAB;
+}
+
+.online{
+	background: #B9B9FF;
+}

@@ -2,10 +2,10 @@
 //  Model
 // ------------------------
 var model = {
-
+	// array of channel names that will be used during API calls
 	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb"],
 
-	//list of all channel objects
+	// array of all channel objects
 	channels: [],
 
 	// Channel object constructor, used by controller.addChannel;
@@ -25,19 +25,12 @@ var model = {
 // ------------------------
 var controller= {
 
-	//some users for testing purposes
-	//--------------------------------
-	//thomasballinger
-	//starladder_cs_en
-	//freecodecamp
-	//--------------------------------
-
 	init: function(){
 		this.getAndSetInfo();
 		view.render();
-		// $.when(this.getAndSetInfo()).then(view.render());
 	},
 
+	// use each channel name in model.channelNames to make an API call
 	getAndSetInfo: function(){
 		for(var i = 0; i < model.channelNames.length; i++){
 			controller.makeStreamCall(model.channelNames[i]);
@@ -96,33 +89,32 @@ var controller= {
 // ------------------------
 var view = {
 
+	// render information about all channels
 	render: function(){
 		$(document).ajaxStop(function() {
 			var channelsInfo = controller.getChannels();
 			for (var i = 0; i < channelsInfo.length; i++){
-				console.log(channelsInfo[i]);
 				var channel = channelsInfo[i];
 				var name = channel.displayName;
 				var logo = channel.logo;
 				var url = channel.url;
 				var status = channel.status;
-				$("#channels").append(
-					"<div>" + 
-					"<p><b>" + name + "</b></p>" + 
-					"<p>" + logo + "</p>" + 
-					"<p>" + url + "</p>" + 
-					"<p>" + status + "</p>" +
-					"<br>" +
-					"</div>"
-				);
+
+				var restOfDiv = "<p><b>" + name + "</b></p>" + 
+								"<p>" + logo + "</p>" + 
+								"<p>" + url + "</p>" + 
+								"<p>" + status + "</p>" +
+								"<br>" +
+								"</div>";
+
+				if(status === "Offline"){
+					$("#channels").append("<div class='offline channel'>" + restOfDiv);
+				} else {
+					$("#channels").append("<div class='online channel'>" + restOfDiv);
+				}
 			}
 		});
-	},
-
-	// displayChannels: function(channels){
-	// 	// console.log(info);
-	// 	$("#temp").append("<div>" +  + "</div>");
-	// }	
+	}
 
 }; // end of view
 
