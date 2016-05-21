@@ -2,9 +2,10 @@
 //  Model
 // ------------------------
 var model = {
-	//list of all channel objects
+
 	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb"],
 
+	//list of all channel objects
 	channels: [],
 
 	// Channel object constructor, used by controller.addChannel;
@@ -33,6 +34,8 @@ var controller= {
 
 	init: function(){
 		this.getAndSetInfo();
+		view.render();
+		// $.when(this.getAndSetInfo()).then(view.render());
 	},
 
 	getAndSetInfo: function(){
@@ -93,10 +96,28 @@ var controller= {
 // ------------------------
 var view = {
 
-	// render: function(){
-	// 	var info = controller.getChannels();
-	// 	this.displayChannels(channels);
-	// },
+	render: function(){
+		$(document).ajaxStop(function() {
+			var channelsInfo = controller.getChannels();
+			for (var i = 0; i < channelsInfo.length; i++){
+				console.log(channelsInfo[i]);
+				var channel = channelsInfo[i];
+				var name = channel.displayName;
+				var logo = channel.logo;
+				var url = channel.url;
+				var status = channel.status;
+				$("#channels").append(
+					"<div>" + 
+					"<p><b>" + name + "</b></p>" + 
+					"<p>" + logo + "</p>" + 
+					"<p>" + url + "</p>" + 
+					"<p>" + status + "</p>" +
+					"<br>" +
+					"</div>"
+				);
+			}
+		});
+	},
 
 	// displayChannels: function(channels){
 	// 	// console.log(info);
