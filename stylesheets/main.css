@@ -10,8 +10,9 @@ body{
 	background: #E4E4E4;
 }
 
+
 /*-----------------------*/
-/*Options*/
+/*Header*/
 
 #header{
 	background: #005689;
@@ -22,13 +23,16 @@ body{
 
 #header h1{
 	font-size: 55px;
+	font-family: 'Oswald', sans-serif;
 }
+
 
 /*-----------------------*/
 /*Options*/
 
 .option{
 	text-align: center;
+	font-family: 'Oswald', sans-serif;
 	padding: 10px 0;
 	cursor: pointer;
 	font-size: 20px;
@@ -58,6 +62,7 @@ body{
 	box-shadow: inset 2px 2px 0px 0px hsl(202, 100%, 8%);
 }
 
+
 /*-----------------------*/
 /*Channels*/
 
@@ -77,19 +82,37 @@ a:hover{
 	background: #F1F1F1;
 }
 
+.offline .name, .offline .status{
+	opacity: .8;
+}
+
+.offline img{
+	opacity: .6;
+}
+
+.notFound .status{
+	color: #F44336;
+}
+
 .channel{
 	padding: 20px 0;
 	border-bottom: 1px solid #598CB3;
+	font-family: 'Raleway', sans-serif;
 }
 
 .logo{
 	border-radius: 50px;
+	border: 3px solid #fff;
 	max-height: 65px;
 	margin: 0 auto;
 }
 
 .info{
 	padding-top: 20px;
+}
+
+.name{
+	font-weight: 700;
 }
 
 
@@ -99,10 +122,6 @@ a:hover{
 @media only screen and (max-width: 480px) {
 	.name .status {
 		width: 100%;
-	}
-
-	.name{
-		font-weight: bold;
 	}
 
 	.status {

@@ -136,7 +136,7 @@ var view = {
 				if(status === "This channel was not found."){
 					$("#channels").append(
 						'<a href=' + url + '>' +
-							'<div class="row offline channel">' + 
+							'<div class="row offline notFound channel">' + 
 								restOfDiv);
 				}else if(status === "Offline"){
 					$("#channels").append(
