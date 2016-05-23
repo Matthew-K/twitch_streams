@@ -6,6 +6,23 @@
 	display: none;
 }
 
+body{
+	background: #E4E4E4;
+}
+
+/*-----------------------*/
+/*Options*/
+
+#header{
+	background: #005689;
+	color: #fff;
+	text-align: center;
+	padding: 25px;
+}
+
+#header h1{
+	font-size: 55px;
+}
 
 /*-----------------------*/
 /*Options*/
@@ -15,32 +32,14 @@
 	padding: 10px 0;
 	cursor: pointer;
 	font-size: 20px;
+	background: #00456E;
+	color: white;
+	border-right: 2px solid #fff;
 }
 
-#allChannels{
-	background: #999;
+.option:last-of-type{
+	border-right:none;
 }
-
-#onlineChannels{
-	background: #bbb;
-}
-
-#offlineChannels{
-	background: #ddd;
-}
-
-#allChannels:hover{
-	background: #888;
-}
-
-#onlineChannels:hover{
-	background: #aaa;
-}
-
-#offlineChannels:hover{
-	background: #ccc;
-}
-
 
 /*-----------------------*/
 /*Channels*/
@@ -54,16 +53,17 @@ a:hover{
 }
 
 .offline{
-	background: #FFABAB;
+	background: #CFD4F2;
 }
 
 .online{
-	background: #B9B9FF;
+	background: #F1F1F1;
 }
 
 .channel{
 	padding: 20px 0;
-	margin-top: 1px;
+	/*margin-top: 1px;*/
+	border-bottom: 1px solid #598CB3;
 }
 
 .logo{
@@ -83,6 +83,10 @@ a:hover{
 @media only screen and (max-width: 480px) {
 	.name .status {
 		width: 100%;
+	}
+
+	.name{
+		font-weight: bold;
 	}
 
 	.status {

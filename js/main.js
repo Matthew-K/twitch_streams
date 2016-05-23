@@ -4,7 +4,7 @@
 var model = {
 
 	// array of channel names that will be used during API calls
-	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb", "comster404"],
+	channelNames: ["freecodecamp", "starladder_cs_en", "dreamleague", "upswingpoker", "thomasballinger", "terakilobyte", "RobotCaleb", "comster404", "medrybw"],
 
 	// array of all channel objects
 	channels: [],
@@ -189,7 +189,7 @@ var view = {
 
 
 // Initialize on start
-controller.init();
+// controller.init();
 
 
 
