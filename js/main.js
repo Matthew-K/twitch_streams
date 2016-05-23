@@ -97,8 +97,8 @@ var controller= {
 var view = {
 
 	init: function(){
-		this.render();
-		this.createClickHandlers();
+		// this.render();
+		// this.createClickHandlers();
 	},
 
 	// render information about all channels 
@@ -113,19 +113,27 @@ var view = {
 				var url = channel.url;
 				var status = channel.status;
 
-				var restOfDiv = "<p><b>" + name + "</b></p>" + 
-								"<p>" + logo + "</p>" + 
-								"<p>" + url + "</p>" + 
-								"<p>" + status + "</p>" +
-								"<br>" +
+
+
+				var displayLogo = "<div class='col-sm-2'><img class='logo img-responsive' src='" + logo + "'></div>";
+				var displayName = "<div class='col-sm-3'>" + name + "</div>";
+				var displayStatus = "<div class='col-sm-7'>" + status + "</div>";
+
+				var restOfDiv = "<a href='" + url + "'>" + displayLogo + displayName + displayStatus +
+					
+			
+								"</a>" +
 								"</div>";
+
+
+
 				if(status === "This channel was not found."){
-					$("#channels").append("<div class='notFound channel'>" + restOfDiv);
+					$("#channels").append("<div class='row notFound channel'>" + restOfDiv);
 				}
 				else if(status === "Offline"){
-					$("#channels").append("<div class='offline channel'>" + restOfDiv);
+					$("#channels").append("<div class='row offline channel'>" + restOfDiv);
 				} else {
-					$("#channels").append("<div class='online channel'>" + restOfDiv);
+					$("#channels").append("<div class='row online channel'>" + restOfDiv);
 				}
 			}
 		});

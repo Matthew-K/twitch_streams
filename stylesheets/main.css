@@ -1,8 +1,20 @@
+.container{
+	max-width: 720px;
+}
+
+.hide{
+	display: none;
+}
+
+
+/*-----------------------*/
+/*Options*/
+
 .option{
 	text-align: center;
-	height: 50px;
-	padding: 0;
+	padding: 10px 0;
 	cursor: pointer;
+	font-size: 20px;
 }
 
 #allChannels{
@@ -29,6 +41,18 @@
 	background: #ccc;
 }
 
+
+/*-----------------------*/
+/*Channels*/
+
+a{
+	color: inherit;
+}
+
+a:hover{
+	color: inherit;
+}
+
 .offline{
 	background: #FFABAB;
 }
@@ -37,6 +61,47 @@
 	background: #B9B9FF;
 }
 
-.hide{
-	display: none;
+.channel{
+	padding: 20px 0;
+	margin-top: 1px;
+}
+
+.logo{
+	border-radius: 50px;
+	max-height: 65px;
+	margin: 0 auto;
+}
+
+.info{
+	padding-top: 20px;
+}
+
+
+
+
+/*-----------------------*/
+/*Media Queries*/
+
+@media only screen and (max-width: 480px) {
+	.name .status {
+		width: 100%;
+	}
+
+	.status {
+		width: 100%;
+	}
+
+	.info{
+		padding-top: 0;
+	}
+
+	div.name.col-xs-4{
+		padding: 0 15px 0 0;
+	}
+
+	div.status.col-xs-8{
+		padding-top: 5px;
+		padding: 5px 15px 0 0;
+	}
+	
 }
