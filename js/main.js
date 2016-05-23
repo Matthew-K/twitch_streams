@@ -46,16 +46,17 @@ var controller= {
 			success: function(results) {
 				// if the stream is offline
 				if(results.error){
-					var error = "error";
-					controller.addChannel(name, error, error, "This channel was not found.");
-				}
-				else if (results.stream === null){
+					controller.addChannel(name, 'http://placehold.it/65x65', "error", "This channel was not found.");
+				} else if (results.stream === null){
 					// call controller.makeChannelCall instead
 					controller.makeChannelCall(name);
 				} else {
 					var channel = results.stream.channel;
 					var displayName = channel.display_name;
 					var logo = channel.logo;
+					if(logo === null){
+						logo = 'http://placehold.it/65x65';
+					}
 					var url = channel.url;
 					var status = channel.status;
 					controller.addChannel(displayName, logo, url, status);
@@ -71,6 +72,9 @@ var controller= {
 			success: function(results) {
 				var displayName = results.display_name;
 				var logo = results.logo;
+				if(logo === null){
+					logo = 'http://placehold.it/65x65';
+				}
 				var url = results.url;
 				var status = "Offline";
 				controller.addChannel(displayName, logo, url, status);
@@ -97,8 +101,8 @@ var controller= {
 var view = {
 
 	init: function(){
-		// this.render();
-		// this.createClickHandlers();
+		this.render();
+		this.createClickHandlers();
 	},
 
 	// render information about all channels 
@@ -113,27 +117,37 @@ var view = {
 				var url = channel.url;
 				var status = channel.status;
 
-
-
-				var displayLogo = "<div class='col-sm-2'><img class='logo img-responsive' src='" + logo + "'></div>";
-				var displayName = "<div class='col-sm-3'>" + name + "</div>";
-				var displayStatus = "<div class='col-sm-7'>" + status + "</div>";
-
-				var restOfDiv = "<a href='" + url + "'>" + displayLogo + displayName + displayStatus +
-					
-			
-								"</a>" +
-								"</div>";
-
-
+				restOfDiv =  
+						'<div class="col-xs-3 col-sm-2">' +
+							'<img class="logo img-responsive" src=' + logo + '>' + 
+						'</div>' + 
+						'<div class="col-xs-9 col-sm-10 info">' +
+							'<div class="row">' +
+								'<div class="name col-xs-4">' +
+									name +
+								'</div>' + 
+								'<div class="status col-xs-8">' +
+									status +
+								'</div>' +
+							'</div>' +
+						'</div>' +
+					'</a>';
 
 				if(status === "This channel was not found."){
-					$("#channels").append("<div class='row notFound channel'>" + restOfDiv);
-				}
-				else if(status === "Offline"){
-					$("#channels").append("<div class='row offline channel'>" + restOfDiv);
-				} else {
-					$("#channels").append("<div class='row online channel'>" + restOfDiv);
+					$("#channels").append(
+						'<a href=' + url + '>' +
+							'<div class="row offline channel">' + 
+								restOfDiv);
+				}else if(status === "Offline"){
+					$("#channels").append(
+						'<a href=' + url + '>' +
+							'<div class="row offline channel">' + 
+								restOfDiv);
+				}else{
+					$("#channels").append(
+						'<a href=' + url + '>' +
+							'<div class="row online channel">' + 
+								restOfDiv);
 				}
 			}
 		});
