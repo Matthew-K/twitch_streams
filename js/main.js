@@ -46,7 +46,7 @@ var controller= {
 			success: function(results) {
 				// if the stream is offline
 				if(results.error){
-					controller.addChannel(name, 'http://placehold.it/65x65', "error", "This channel was not found.");
+					controller.addChannel(name, 'http://placehold.it/65x65', "", "This channel was not found.");
 				} else if (results.stream === null){
 					// call controller.makeChannelCall instead
 					controller.makeChannelCall(name);
@@ -160,28 +160,40 @@ var view = {
 		this.offlineClick();
 	},
 
-	// display all channels when #allChannels div is clicked
+	// display all channels when #allChannels div is clicked. Add .active class to #allChannels.
 	allClick: function(){
 		$("#allChannels").on("click", function(){
 			$(".hide").removeClass("hide");
+
+			$("#allChannels").addClass("active");
+			$("#onlineChannels").removeClass("active");
+			$("#offlineChannels").removeClass("active");
 		});
 	},
 
-	// display online channels when #onlineChannels div is clicked
+	// display online channels when #onlineChannels div is clicked. Add .active class to #onlineChannels.
 	onlineClick: function(){
 		$("#onlineChannels").on("click", function(){
 			$(".notFound").addClass("hide");
 			$(".offline").addClass("hide");
 			$(".online").removeClass("hide");
+
+			$("#allChannels").removeClass("active");
+			$("#onlineChannels").addClass("active");
+			$("#offlineChannels").removeClass("active");
 		});
 	},
 
-	// display offline channels when #offlineChannels div is clicked
+	// display offline channels when #offlineChannels div is clicked. Add .active class to #offlineChannels.
 	offlineClick: function(){
 		$("#offlineChannels").on("click", function(){
 			$(".notFound").addClass("hide");
 			$(".online").addClass("hide");
 			$(".offline").removeClass("hide");
+
+			$("#allChannels").removeClass("active");
+			$("#onlineChannels").removeClass("active");
+			$("#offlineChannels").addClass("active");
 		});
 	}
 
@@ -189,7 +201,7 @@ var view = {
 
 
 // Initialize on start
-// controller.init();
+controller.init();
 
 
 
