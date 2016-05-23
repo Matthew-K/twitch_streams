@@ -46,7 +46,7 @@ var controller= {
 			success: function(results) {
 				// if the stream is offline
 				if(results.error){
-					controller.addChannel(name, 'http://placehold.it/65x65', "", "This channel was not found.");
+					controller.addChannel(name, "images/placeholder.jpg", "", "This channel was not found.");
 				} else if (results.stream === null){
 					// call controller.makeChannelCall instead
 					controller.makeChannelCall(name);
@@ -55,7 +55,7 @@ var controller= {
 					var displayName = channel.display_name;
 					var logo = channel.logo;
 					if(logo === null){
-						logo = 'http://placehold.it/65x65';
+						logo = "images/placeholder.jpg";
 					}
 					var url = channel.url;
 					var status = channel.status;
@@ -73,7 +73,7 @@ var controller= {
 				var displayName = results.display_name;
 				var logo = results.logo;
 				if(logo === null){
-					logo = 'http://placehold.it/65x65';
+					logo = "images/placeholder.jpg";
 				}
 				var url = results.url;
 				var status = "Offline";
@@ -135,9 +135,8 @@ var view = {
 
 				if(status === "This channel was not found."){
 					$("#channels").append(
-						'<a href=' + url + '>' +
-							'<div class="row offline notFound channel">' + 
-								restOfDiv);
+						'<div class="row offline notFound channel">' + 
+							restOfDiv);
 				}else if(status === "Offline"){
 					$("#channels").append(
 						'<a href=' + url + '>' +
