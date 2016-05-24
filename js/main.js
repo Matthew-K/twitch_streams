@@ -139,12 +139,12 @@ var view = {
 							restOfDiv);
 				}else if(status === "Offline"){
 					$("#channels").append(
-						'<a href=' + url + '>' +
+						'<a href=' + url + ' target="_blank"' + '>' +
 							'<div class="row offline channel">' + 
 								restOfDiv);
 				}else{
 					$("#channels").append(
-						'<a href=' + url + '>' +
+						'<a href=' + url + ' target="_blank"' +'>' +
 							'<div class="row online channel">' + 
 								restOfDiv);
 				}
