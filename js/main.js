@@ -14,7 +14,7 @@ var model = {
 		this.displayName = displayName;
 		this.logo = logo;
 		this.url = url;
-		this.status = status;	
+		this.status = status;
 	}
 
 }; // end of data
@@ -43,6 +43,9 @@ var controller= {
 		$.ajax({
 			dataType: "jsonp",
 			url: "https://api.twitch.tv/kraken/streams/" + name,
+			 headers: {
+			   'Client-ID': '5l1q5lqmclj76tgcae5edpk8ar6kpg2'
+			 },
 			success: function(results) {
 				// if the stream is offline
 				if(results.error){
