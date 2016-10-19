@@ -41,16 +41,14 @@ var controller= {
 
 	makeStreamCall: function(name){
 		$.ajax({
-			dataType: "jsonp",
+			type: 'GET',
 			url: "https://api.twitch.tv/kraken/streams/" + name,
-			 headers: {
-			   'Client-ID': '5l1q5lqmclj76tgcae5edpk8ar6kpg2'
-			 },
+			headers: {
+				'Client-ID': '5l1q5lqmclj76tgcae5edpk8ar6kpg2'
+			},
 			success: function(results) {
 				// if the stream is offline
-				if(results.error){
-					controller.addChannel(name, "images/placeholder.jpg", "", "This channel was not found.");
-				} else if (results.stream === null){
+				if (results.stream === null){
 					// call controller.makeChannelCall instead
 					controller.makeChannelCall(name);
 				} else {
@@ -64,14 +62,21 @@ var controller= {
 					var status = channel.status;
 					controller.addChannel(displayName, logo, url, status);
 				}
+			},
+			error: function() {
+			        controller.addChannel(name, "images/placeholder.jpg", "", "This channel was not found.");
 			}
 		});
 	},
 
+	// Used to make ajax calls for offline channels
 	makeChannelCall: function(name){
 		$.ajax({
-			dataType: "jsonp",
+			type: 'GET',
 			url: "https://api.twitch.tv/kraken/channels/" + name,
+			headers: {
+			   'Client-ID': '5l1q5lqmclj76tgcae5edpk8ar6kpg2'
+			 },
 			success: function(results) {
 				var displayName = results.display_name;
 				var logo = results.logo;
