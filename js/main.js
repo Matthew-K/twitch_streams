@@ -44,7 +44,7 @@ var controller= {
 			type: 'GET',
 			url: "https://api.twitch.tv/kraken/streams/" + name,
 			headers: {
-				'Client-ID': '5l1q5lqmclj76tgcae5edpk8ar6kpg2'
+				'Client-ID': ''
 			},
 			success: function(results) {
 				// if the stream is offline
